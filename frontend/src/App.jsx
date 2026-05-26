@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./App.css"
 
 function App() {
   const [cliente, setCliente] = useState("")
@@ -6,11 +7,11 @@ function App() {
   const [valor, setValor] = useState("")
   const [itens, setItens] = useState([])
 
+  const total = itens.reduce((soma, item) => soma + item.valor, 0)
+
   function adicionarItem() {
     if (!quantidade || !valor) return
-function imprimirCupom() {
-  window.print()
-}
+
     const novoItem = {
       produto: "Frango",
       quantidade: Number(quantidade),
@@ -21,114 +22,85 @@ function imprimirCupom() {
     setQuantidade("")
     setValor("")
   }
-function imprimirCupom() {
-  window.print()
-}
-  const total = itens.reduce((soma, item) => soma + item.valor, 0)
+
+  function imprimirCupom() {
+    window.print()
+  }
 
   return (
-    <div style={{ background: "#f3f4f6", minHeight: "100vh", padding: "30px", fontFamily: "Arial" }}>
-      <div>
-  <h1
-    style={{
-      fontSize: "38px",
-      marginBottom: "5px",
-      color: "#4126dc"
-    }}
-  >
-    Denis Frango 
-  </h1>
+    <div className="app">
+      <header className="topo">
+        <h1>Denis Frango</h1>
+        <p>Abatedor de Frango</p>
+      </header>
 
-  <p
-    style={{
-      color: "#6b7280",
-      marginBottom: "20px"
-    }}
-  >
-    Abatedor de Frango
-  </p>
-</div>
-
-      <div style={{ display: "flex", gap: "20px" }}>
-        <div style={{ background: "white", padding: "20px", borderRadius: "12px", width: "400px" }}>
+      <main className="layout">
+        <section className="card venda">
           <h2>Nova Venda</h2>
 
-          <input type="text" placeholder="Nome do cliente" value={cliente} onChange={(e) => setCliente(e.target.value)} style={inputStyle} />
-          <input type="number" placeholder="Quantidade (kg)" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} style={inputStyle} />
-          <input type="number" placeholder="Valor" value={valor} onChange={(e) => setValor(e.target.value)} style={inputStyle} />
+          <input
+            type="text"
+            placeholder="Nome do cliente"
+            value={cliente}
+            onChange={(e) => setCliente(e.target.value)}
+          />
 
-          <button style={botaoStyle} onClick={adicionarItem}>
+          <input
+            type="number"
+            placeholder="Quantidade (kg)"
+            value={quantidade}
+            onChange={(e) => setQuantidade(e.target.value)}
+          />
+
+          <input
+            type="number"
+            placeholder="Valor"
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+          />
+
+          <button className="btn adicionar" onClick={adicionarItem}>
             Adicionar
           </button>
-        </div>
+        </section>
 
-        <div style={{ background: "white", padding: "20px", borderRadius: "12px", flex: 1 }}>
-          <h2>Cupom / Venda</h2>
+        <section className="cupom">
+          <h2>Denis Frango</h2>
+          <p className="subtitulo">Comprovante de Venda</p>
+
+          <hr />
+
           <p><strong>Cliente:</strong> {cliente || "Não informado"}</p>
+          <p><strong>Data:</strong> {new Date().toLocaleDateString("pt-BR")}</p>
 
-<p>
-  <strong>Data:</strong>{" "}
-  {new Date().toLocaleDateString()}
-</p>
+          <hr />
 
-          <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "20px" }}>
-            <thead>
-              <tr style={{ background: "#f9fafb" }}>
-                <th style={thStyle}>Produto</th>
-                <th style={thStyle}>Qtd</th>
-                <th style={thStyle}>Valor</th>
-              </tr>
-            </thead>
+          {itens.length === 0 ? (
+            <p className="vazio">Nenhum item adicionado.</p>
+          ) : (
+            itens.map((item, index) => (
+              <div className="item-cupom" key={index}>
+                <span>{item.produto} {item.quantidade}kg</span>
+                <span>R$ {item.valor.toFixed(2).replace(".", ",")}</span>
+              </div>
+            ))
+          )}
 
-            <tbody>
-              {itens.map((item, index) => (
-                <tr key={index}>
-                  <td style={tdStyle}>{item.produto}</td>
-                  <td style={tdStyle}>{item.quantidade} kg</td>
-                  <td style={tdStyle}>R$ {item.valor.toFixed(2).replace(".", ",")}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <hr />
 
-          <h2 style={{ marginTop: "30px", textAlign: "right" }}>
+          <div className="total">
             Total: R$ {total.toFixed(2).replace(".", ",")}
-          </h2>
+          </div>
 
-          <button
-  style={{ ...botaoStyle, background: "#2563eb" }}
-  onClick={imprimirCupom}
->
-  Imprimir Cupom
-</button>
-        </div>
-      </div>
+          <p className="rodape">Obrigado pela preferência!</p>
+
+          <button className="btn imprimir" onClick={imprimirCupom}>
+            Imprimir Cupom
+          </button>
+        </section>
+      </main>
     </div>
   )
 }
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px",
-  marginTop: "12px",
-  borderRadius: "8px",
-  border: "1px solid #d1d5db",
-  fontSize: "16px"
-}
-
-const botaoStyle = {
-  width: "100%",
-  padding: "14px",
-  marginTop: "15px",
-  background: "#16a34a",
-  color: "white",
-  border: "none",
-  borderRadius: "8px",
-  fontSize: "16px",
-  cursor: "pointer"
-}
-
-const thStyle = { padding: "12px", borderBottom: "1px solid #e5e7eb", textAlign: "left" }
-const tdStyle = { padding: "12px", borderBottom: "1px solid #f1f5f9" }
 
 export default App
