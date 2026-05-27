@@ -35,7 +35,13 @@ function App() {
       </header>
 
       <main className="layout">
-        <section className="card venda">
+        <form
+  className="card venda"
+  onSubmit={(e) => {
+    e.preventDefault()
+    adicionarItem()
+  }}
+>
           <h2>Nova Venda</h2>
 
           <input
@@ -59,10 +65,10 @@ function App() {
             onChange={(e) => setValor(e.target.value)}
           />
 
-          <button className="btn adicionar" onClick={adicionarItem}>
-            Adicionar
-          </button>
-        </section>
+        <button className="btn adicionar" type="submit">
+  Adicionar
+</button>
+       </form>
 
         <section className="cupom">
           <h2>Denis Frango</h2>

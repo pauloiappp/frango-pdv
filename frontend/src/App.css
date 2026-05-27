@@ -1,8 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding: 32px;
+  min-height: 100vh;
   background: #f3f4f6;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111827;
+}
+
+/* =========================
+   TÍTULO
+========================= */
+
+h1,
+h2,
+.titulo {
+  text-align: center;
+  color: #111827;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-bottom: 28px;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+input {
+  width: 180px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+button {
+  height: 38px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 /* =========================
@@ -10,42 +81,106 @@ body {
 ========================= */
 
 .cupom {
-  width: 320px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  font-family: "Courier New", monospace;
+  width: 360px;
+  margin: 0 auto;
+  padding: 26px 22px;
+  background: #ffffff;
+  border-radius: 8px;
+  font-family: "Courier New", Courier, monospace;
+  color: #374151;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
 }
 
 .cupom h2 {
+  margin: 0 0 8px;
   text-align: center;
-  margin-bottom: 10px;
+  font-size: 22px;
+  color: #111827;
+  font-weight: 700;
+}
+
+.cupom p {
+  margin: 6px 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.cupom strong {
+  color: #111827;
 }
 
 .cupom hr {
   border: none;
-  border-top: 1px dashed #999;
-  margin: 10px 0;
+  border-top: 1px dashed #9ca3af;
+  margin: 14px 0;
 }
 
 .item-cupom {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.item-cupom span:first-child {
+  max-width: 65%;
+  word-break: break-word;
 }
 
 .total {
-  margin-top: 20px;
+  margin-top: 22px;
+  padding-top: 12px;
+  border-top: 1px dashed #9ca3af;
   font-size: 22px;
   text-align: right;
-  font-weight: bold;
+  font-weight: 700;
+  color: #111827;
 }
 
 .rodape {
+  margin-top: 24px;
   text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Botão dentro do cupom */
+.cupom button {
+  display: block;
+  margin: 14px auto 0;
+  height: 34px;
+  background: #111827;
+  font-size: 13px;
+}
+
+.cupom button:hover {
+  background: #000000;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input,
+  button {
+    width: 100%;
+  }
+
+  .cupom {
+    width: 100%;
+    max-width: 360px;
+  }
 }
 
 /* =========================
@@ -53,19 +188,32 @@ body {
 ========================= */
 
 @media print {
-
   body {
-    background: white;
+    padding: 0;
+    background: #ffffff;
   }
 
+  form,
   button {
-    display: none;
+    display: none !important;
   }
 
   .cupom {
-    width: 100%;
-    box-shadow: none;
+    width: 80mm;
+    margin: 0;
+    padding: 8mm 5mm;
     border-radius: 0;
+    box-shadow: none;
+    color: #000000;
   }
 
+  .cupom h2,
+  .total,
+  .cupom strong {
+    color: #000000;
+  }
+
+  .rodape {
+    color: #000000;
+  }
 }
