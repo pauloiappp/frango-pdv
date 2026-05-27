@@ -1,6 +1,9 @@
 import { useState } from "react"
 import "./App.css"
 
+import FormVenda from "./components/FormVenda"
+import Cupom from "./components/Cupom"
+
 function App() {
   const [cliente, setCliente] = useState("")
   const [quantidade, setQuantidade] = useState("")
@@ -35,75 +38,22 @@ function App() {
       </header>
 
       <main className="layout">
-        <form
-  className="card venda"
-  onSubmit={(e) => {
-    e.preventDefault()
-    adicionarItem()
-  }}
->
-          <h2>Nova Venda</h2>
+        <FormVenda
+          cliente={cliente}
+          setCliente={setCliente}
+          quantidade={quantidade}
+          setQuantidade={setQuantidade}
+          valor={valor}
+          setValor={setValor}
+          adicionarItem={adicionarItem}
+        />
 
-          <input
-            type="text"
-            placeholder="Nome do cliente"
-            value={cliente}
-            onChange={(e) => setCliente(e.target.value)}
-          />
-
-          <input
-            type="number"
-            placeholder="Quantidade (kg)"
-            value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
-          />
-
-          <input
-            type="number"
-            placeholder="Valor"
-            value={valor}
-            onChange={(e) => setValor(e.target.value)}
-          />
-
-        <button className="btn adicionar" type="submit">
-  Adicionar
-</button>
-       </form>
-
-        <section className="cupom">
-          <h2>Denis Frango</h2>
-          <p className="subtitulo">Comprovante de Venda</p>
-
-          <hr />
-
-          <p><strong>Cliente:</strong> {cliente || "Não informado"}</p>
-          <p><strong>Data:</strong> {new Date().toLocaleDateString("pt-BR")}</p>
-
-          <hr />
-
-          {itens.length === 0 ? (
-            <p className="vazio">Nenhum item adicionado.</p>
-          ) : (
-            itens.map((item, index) => (
-              <div className="item-cupom" key={index}>
-                <span>{item.produto} {item.quantidade}kg</span>
-                <span>R$ {item.valor.toFixed(2).replace(".", ",")}</span>
-              </div>
-            ))
-          )}
-
-          <hr />
-
-          <div className="total">
-            Total: R$ {total.toFixed(2).replace(".", ",")}
-          </div>
-
-          <p className="rodape">Obrigado pela preferência!</p>
-
-          <button className="btn imprimir" onClick={imprimirCupom}>
-            Imprimir Cupom
-          </button>
-        </section>
+        <Cupom
+          cliente={cliente}
+          itens={itens}
+          total={total}
+          imprimirCupom={imprimirCupom}
+        />
       </main>
     </div>
   )
