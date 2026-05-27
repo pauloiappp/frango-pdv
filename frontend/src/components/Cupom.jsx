@@ -1,4 +1,5 @@
 function Cupom({
+  numeroCupom,
   cliente,
   itens,
   total,
@@ -9,17 +10,26 @@ function Cupom({
   troco
 }) {
   const dataAtual = new Date().toLocaleDateString("pt-BR")
+  const numeroFormatado = String(numeroCupom).padStart(5, "0")
 
   function formatarMoeda(valor) {
     return valor.toFixed(2).replace(".", ",")
   }
 
+  function formatarKg(valor) {
+    return valor.toFixed(3).replace(".", ",")
+  }
+
   function textoItem(item) {
     if (item.produto === "Frango inteiro") {
-      return `${item.produto} - ${item.quantidadeFrangos}un - ${item.pesoKg}kg`
+      return `${item.produto} - ${item.quantidadeFrangos}un - ${formatarKg(
+        item.pesoKg
+      )}kg x R$ ${formatarMoeda(item.precoKg)}/kg`
     }
 
-    return `${item.produto} - ${item.pesoKg}kg`
+    return `${item.produto} - ${formatarKg(item.pesoKg)}kg x R$ ${formatarMoeda(
+      item.precoKg
+    )}/kg`
   }
 
   return (
@@ -28,6 +38,7 @@ function Cupom({
         <div className="cupom-topo">
           <h2>Denis Frango</h2>
           <p>Comprovante de Venda</p>
+          <strong className="numero-cupom">Cupom Nº {numeroFormatado}</strong>
         </div>
 
         <div className="linha-tracejada"></div>

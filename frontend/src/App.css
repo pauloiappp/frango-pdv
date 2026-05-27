@@ -446,3 +446,531 @@ body {
     font-size: 11px;
   }
 }
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #eef2f7;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111827;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 28px;
+}
+
+.topo {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding: 18px 22px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.topo h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #111827;
+}
+
+.topo p {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.layout-pdv {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.venda {
+  width: 100%;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.card-header span {
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo label {
+  color: #374151;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  outline: none;
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+
+.linha-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn.adicionar {
+  height: 46px;
+  margin-top: 6px;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.btn.adicionar:hover {
+  background: #15803d;
+}
+
+.btn.imprimir {
+  height: 44px;
+  margin-top: 16px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.btn.imprimir:hover {
+  background: #1d4ed8;
+}
+
+/* =========================
+   CUPOM TÉRMICO
+========================= */
+
+.painel-venda {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cupom {
+  width: 80mm;
+  max-width: 100%;
+  padding: 22px 18px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  font-family: "Courier New", Courier, monospace;
+  color: #111827;
+}
+
+.cupom-topo {
+  text-align: center;
+}
+
+.cupom-topo h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.cupom-topo p {
+  margin: 6px 0 0;
+  font-size: 13px;
+}
+
+.numero-cupom {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #111827;
+}
+
+.linha-tracejada {
+  border-top: 1px dashed #9ca3af;
+  margin: 12px 0;
+}
+
+.dados-cupom p {
+  margin: 5px 0;
+  font-size: 13px;
+}
+
+.lista-itens {
+  min-height: 80px;
+}
+
+.vazio {
+  margin: 12px 0;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.item-cupom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13px;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1.3;
+}
+
+.item-info span {
+  flex: 1;
+  word-break: break-word;
+}
+
+.item-info strong {
+  white-space: nowrap;
+}
+
+.btn-remover {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 4px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-remover:hover {
+  background: #fecaca;
+}
+
+.total-cupom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.total-cupom strong {
+  font-size: 20px;
+}
+
+.pagamento-cupom {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.linha-cupom {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.linha-cupom strong {
+  text-align: right;
+}
+
+.linha-cupom.troco {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rodape {
+  margin: 12px 0 0;
+  text-align: center;
+  color: #374151;
+  font-size: 12px;
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 768px) {
+  .app {
+    padding: 14px;
+  }
+
+  .topo {
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 9px;
+  }
+
+  .topo h1 {
+    font-size: 24px;
+  }
+
+  .topo p {
+    font-size: 13px;
+  }
+
+  .layout-pdv {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .venda {
+    padding: 18px;
+    gap: 13px;
+  }
+
+  .card-header h2 {
+    font-size: 20px;
+  }
+
+  .linha-campos {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .campo input,
+  .campo select {
+    width: 100%;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .btn.adicionar,
+  .btn.imprimir {
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .painel-venda {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cupom {
+    width: 100%;
+    max-width: 420px;
+    padding: 18px 14px;
+  }
+
+  .item-cupom {
+    align-items: flex-start;
+  }
+
+  .item-info {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .item-info strong {
+    text-align: left;
+  }
+
+  .btn-remover {
+    width: 30px;
+    height: 30px;
+  }
+
+  .total-cupom {
+    font-size: 17px;
+  }
+
+  .total-cupom strong {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .app {
+    padding: 10px;
+  }
+
+  .topo,
+  .venda,
+  .cupom {
+    border-radius: 8px;
+  }
+
+  .cupom {
+    max-width: 100%;
+  }
+
+  .linha-cupom,
+  .total-cupom {
+    align-items: flex-start;
+  }
+}
+
+/* =========================
+   IMPRESSÃO
+========================= */
+
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .topo,
+  .venda,
+  .btn-remover,
+  .btn.imprimir {
+    display: none !important;
+  }
+
+  .app {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .layout-pdv {
+    display: block;
+    max-width: none;
+    margin: 0;
+  }
+
+  .painel-venda {
+    display: block;
+  }
+
+  .cupom {
+    width: 80mm;
+    max-width: 80mm;
+    margin: 0;
+    padding: 4mm;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #000000;
+  }
+
+  .cupom-topo h2 {
+    font-size: 18px;
+  }
+
+  .cupom-topo p,
+  .numero-cupom,
+  .dados-cupom p,
+  .linha-cupom,
+  .item-cupom {
+    font-size: 12px;
+  }
+
+  .linha-tracejada {
+    border-top: 1px dashed #000000;
+    margin: 8px 0;
+  }
+
+  .lista-itens {
+    min-height: auto;
+  }
+
+  .item-cupom {
+    padding: 3px 0;
+  }
+
+  .item-info {
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .item-info strong {
+    text-align: right;
+  }
+
+  .total-cupom {
+    font-size: 16px;
+  }
+
+  .total-cupom strong {
+    font-size: 18px;
+  }
+
+  .linha-cupom.troco {
+    font-size: 14px;
+  }
+
+  .rodape {
+    color: #000000;
+    font-size: 11px;
+  }
+}

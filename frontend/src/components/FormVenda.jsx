@@ -6,7 +6,9 @@ function FormVenda({
   quantidadeFrangos,
   setQuantidadeFrangos,
   pesoKg,
-  setPesoKg,
+  atualizarPeso,
+  precoKg,
+  atualizarPrecoKg,
   valor,
   setValor,
   adicionarItem,
@@ -68,9 +70,21 @@ function FormVenda({
         <label>Peso total (kg)</label>
         <input
           type="number"
-          placeholder="Ex: 4"
+          step="0.001"
+          placeholder="Ex: 1.300"
           value={pesoKg}
-          onChange={(e) => setPesoKg(e.target.value)}
+          onChange={(e) => atualizarPeso(e.target.value)}
+        />
+      </div>
+
+      <div className="campo">
+        <label>Preço por kg</label>
+        <input
+          type="number"
+          step="0.01"
+          placeholder="Ex: 18"
+          value={precoKg}
+          onChange={(e) => atualizarPrecoKg(e.target.value)}
         />
       </div>
 
@@ -78,7 +92,8 @@ function FormVenda({
         <label>Valor</label>
         <input
           type="number"
-          placeholder="Valor da venda"
+          step="0.01"
+          placeholder="Valor total"
           value={valor}
           onChange={(e) => setValor(e.target.value)}
         />
@@ -101,6 +116,7 @@ function FormVenda({
           <label>Valor recebido</label>
           <input
             type="number"
+            step="0.01"
             placeholder="Valor recebido"
             value={valorRecebido}
             onChange={(e) => setValorRecebido(e.target.value)}

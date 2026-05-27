@@ -9,13 +9,33 @@ function App() {
   const [produto, setProduto] = useState("Frango inteiro")
   const [quantidadeFrangos, setQuantidadeFrangos] = useState("")
   const [pesoKg, setPesoKg] = useState("")
+  const [precoKg, setPrecoKg] = useState("")
   const [valor, setValor] = useState("")
   const [itens, setItens] = useState([])
   const [formaPagamento, setFormaPagamento] = useState("Dinheiro")
   const [valorRecebido, setValorRecebido] = useState("")
+  const [numeroCupom, setNumeroCupom] = useState(1)
 
   const total = itens.reduce((soma, item) => soma + item.valor, 0)
   const troco = Number(valorRecebido) - total
+
+  function atualizarPeso(novoPeso) {
+    setPesoKg(novoPeso)
+
+    if (novoPeso && precoKg) {
+      const valorCalculado = Number(novoPeso) * Number(precoKg)
+      setValor(valorCalculado.toFixed(2))
+    }
+  }
+
+  function atualizarPrecoKg(novoPrecoKg) {
+    setPrecoKg(novoPrecoKg)
+
+    if (pesoKg && novoPrecoKg) {
+      const valorCalculado = Number(pesoKg) * Number(novoPrecoKg)
+      setValor(valorCalculado.toFixed(2))
+    }
+  }
 
   function adicionarItem() {
     if (!pesoKg || !valor) return
@@ -26,12 +46,14 @@ function App() {
       produto,
       quantidadeFrangos: Number(quantidadeFrangos) || 0,
       pesoKg: Number(pesoKg),
+      precoKg: Number(precoKg) || 0,
       valor: Number(valor)
     }
 
     setItens([...itens, novoItem])
     setQuantidadeFrangos("")
     setPesoKg("")
+    setPrecoKg("")
     setValor("")
   }
 
@@ -42,6 +64,7 @@ function App() {
 
   function imprimirCupom() {
     window.print()
+    setNumeroCupom(numeroCupom + 1)
   }
 
   return (
@@ -62,7 +85,9 @@ function App() {
           quantidadeFrangos={quantidadeFrangos}
           setQuantidadeFrangos={setQuantidadeFrangos}
           pesoKg={pesoKg}
-          setPesoKg={setPesoKg}
+          atualizarPeso={atualizarPeso}
+          precoKg={precoKg}
+          atualizarPrecoKg={atualizarPrecoKg}
           valor={valor}
           setValor={setValor}
           adicionarItem={adicionarItem}
@@ -73,6 +98,7 @@ function App() {
         />
 
         <Cupom
+          numeroCupom={numeroCupom}
           cliente={cliente}
           itens={itens}
           total={total}
