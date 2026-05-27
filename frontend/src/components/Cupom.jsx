@@ -1,4 +1,13 @@
-function Cupom({ cliente, itens, total, imprimirCupom }) {
+function Cupom({
+  cliente,
+  itens,
+  total,
+  imprimirCupom,
+  removerItem,
+  formaPagamento,
+  valorRecebido,
+  troco
+}) {
   const dataAtual = new Date().toLocaleDateString("pt-BR")
 
   function formatarMoeda(valor) {
@@ -31,7 +40,17 @@ function Cupom({ cliente, itens, total, imprimirCupom }) {
               {item.produto} {item.quantidade}kg
             </span>
 
-            <span>R$ {formatarMoeda(item.valor)}</span>
+            <div className="item-acoes">
+              <span>R$ {formatarMoeda(item.valor)}</span>
+
+              <button
+                className="btn-remover"
+                type="button"
+                onClick={() => removerItem(index)}
+              >
+                X
+              </button>
+            </div>
           </div>
         ))
       )}
@@ -40,6 +59,26 @@ function Cupom({ cliente, itens, total, imprimirCupom }) {
 
       <div className="total">
         Total: R$ {formatarMoeda(total)}
+      </div>
+
+      <div className="pagamento-cupom">
+        <p>
+          <strong>Pagamento:</strong> {formaPagamento}
+        </p>
+
+        {formaPagamento === "Dinheiro" && (
+          <>
+            <p>
+              <strong>Recebido:</strong>{" "}
+              R$ {formatarMoeda(Number(valorRecebido) || 0)}
+            </p>
+
+            <p>
+              <strong>Troco:</strong>{" "}
+              R$ {formatarMoeda(troco > 0 ? troco : 0)}
+            </p>
+          </>
+        )}
       </div>
 
       <p className="rodape">Obrigado pela preferência!</p>
