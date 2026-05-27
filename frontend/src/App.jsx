@@ -6,7 +6,9 @@ import Cupom from "./components/Cupom"
 
 function App() {
   const [cliente, setCliente] = useState("")
-  const [quantidade, setQuantidade] = useState("")
+  const [produto, setProduto] = useState("Frango inteiro")
+  const [quantidadeFrangos, setQuantidadeFrangos] = useState("")
+  const [pesoKg, setPesoKg] = useState("")
   const [valor, setValor] = useState("")
   const [itens, setItens] = useState([])
   const [formaPagamento, setFormaPagamento] = useState("Dinheiro")
@@ -16,16 +18,20 @@ function App() {
   const troco = Number(valorRecebido) - total
 
   function adicionarItem() {
-    if (!quantidade || !valor) return
+    if (!pesoKg || !valor) return
+
+    if (produto === "Frango inteiro" && !quantidadeFrangos) return
 
     const novoItem = {
-      produto: "Frango",
-      quantidade: Number(quantidade),
+      produto,
+      quantidadeFrangos: Number(quantidadeFrangos) || 0,
+      pesoKg: Number(pesoKg),
       valor: Number(valor)
     }
 
     setItens([...itens, novoItem])
-    setQuantidade("")
+    setQuantidadeFrangos("")
+    setPesoKg("")
     setValor("")
   }
 
@@ -41,40 +47,42 @@ function App() {
   return (
     <div className="app">
       <header className="topo">
-        <h1>Denis Frango</h1>
-        <p>Abatedor de Frango</p>
+        <div>
+          <h1>Denis Frango</h1>
+          <p>Sistema de venda - Abatedor de Frango</p>
+        </div>
       </header>
 
-   <main className="layout-pdv">
-  <div className="painel-formulario">
-    <FormVenda
-      cliente={cliente}
-      setCliente={setCliente}
-      quantidade={quantidade}
-      setQuantidade={setQuantidade}
-      valor={valor}
-      setValor={setValor}
-      adicionarItem={adicionarItem}
-      formaPagamento={formaPagamento}
-      setFormaPagamento={setFormaPagamento}
-      valorRecebido={valorRecebido}
-      setValorRecebido={setValorRecebido}
-    />
-  </div>
+      <main className="layout-pdv">
+        <FormVenda
+          cliente={cliente}
+          setCliente={setCliente}
+          produto={produto}
+          setProduto={setProduto}
+          quantidadeFrangos={quantidadeFrangos}
+          setQuantidadeFrangos={setQuantidadeFrangos}
+          pesoKg={pesoKg}
+          setPesoKg={setPesoKg}
+          valor={valor}
+          setValor={setValor}
+          adicionarItem={adicionarItem}
+          formaPagamento={formaPagamento}
+          setFormaPagamento={setFormaPagamento}
+          valorRecebido={valorRecebido}
+          setValorRecebido={setValorRecebido}
+        />
 
-  <div className="painel-cupom">
-    <Cupom
-      cliente={cliente}
-      itens={itens}
-      total={total}
-      imprimirCupom={imprimirCupom}
-      removerItem={removerItem}
-      formaPagamento={formaPagamento}
-      valorRecebido={valorRecebido}
-      troco={troco}
-    />
-  </div>
-</main>
+        <Cupom
+          cliente={cliente}
+          itens={itens}
+          total={total}
+          imprimirCupom={imprimirCupom}
+          removerItem={removerItem}
+          formaPagamento={formaPagamento}
+          valorRecebido={valorRecebido}
+          troco={troco}
+        />
+      </main>
     </div>
   )
 }

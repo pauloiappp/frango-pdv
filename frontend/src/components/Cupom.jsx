@@ -14,78 +14,96 @@ function Cupom({
     return valor.toFixed(2).replace(".", ",")
   }
 
+  function textoItem(item) {
+    if (item.produto === "Frango inteiro") {
+      return `${item.produto} - ${item.quantidadeFrangos}un - ${item.pesoKg}kg`
+    }
+
+    return `${item.produto} - ${item.pesoKg}kg`
+  }
+
   return (
-    <section className="cupom">
-      <h2>Denis Frango</h2>
-      <p className="subtitulo">Comprovante de Venda</p>
+    <section className="painel-venda">
+      <div className="cupom">
+        <div className="cupom-topo">
+          <h2>Denis Frango</h2>
+          <p>Comprovante de Venda</p>
+        </div>
 
-      <hr />
+        <div className="linha-tracejada"></div>
 
-      <p>
-        <strong>Cliente:</strong> {cliente || "Não informado"}
-      </p>
+        <div className="dados-cupom">
+          <p>
+            <strong>Cliente:</strong> {cliente || "Não informado"}
+          </p>
+          <p>
+            <strong>Data:</strong> {dataAtual}
+          </p>
+        </div>
 
-      <p>
-        <strong>Data:</strong> {dataAtual}
-      </p>
+        <div className="linha-tracejada"></div>
 
-      <hr />
+        <div className="lista-itens">
+          {itens.length === 0 ? (
+            <p className="vazio">Nenhum item adicionado.</p>
+          ) : (
+            itens.map((item, index) => (
+              <div className="item-cupom" key={index}>
+                <div className="item-info">
+                  <span>{textoItem(item)}</span>
+                  <strong>R$ {formatarMoeda(item.valor)}</strong>
+                </div>
 
-      {itens.length === 0 ? (
-        <p className="vazio">Nenhum item adicionado.</p>
-      ) : (
-        itens.map((item, index) => (
-          <div className="item-cupom" key={index}>
-            <span>
-              {item.produto} {item.quantidade}kg
-            </span>
+                <button
+                  className="btn-remover"
+                  type="button"
+                  onClick={() => removerItem(index)}
+                >
+                  X
+                </button>
+              </div>
+            ))
+          )}
+        </div>
 
-            <div className="item-acoes">
-              <span>R$ {formatarMoeda(item.valor)}</span>
+        <div className="linha-tracejada"></div>
 
-              <button
-                className="btn-remover"
-                type="button"
-                onClick={() => removerItem(index)}
-              >
-                X
-              </button>
-            </div>
+        <div className="total-cupom">
+          <span>Total</span>
+          <strong>R$ {formatarMoeda(total)}</strong>
+        </div>
+
+        <div className="linha-tracejada"></div>
+
+        <div className="pagamento-cupom">
+          <div className="linha-cupom">
+            <span>Pagamento</span>
+            <strong>{formaPagamento}</strong>
           </div>
-        ))
-      )}
 
-      <hr />
+          {formaPagamento === "Dinheiro" && (
+            <>
+              <div className="linha-cupom">
+                <span>Recebido</span>
+                <strong>R$ {formatarMoeda(Number(valorRecebido) || 0)}</strong>
+              </div>
 
-      <div className="total">
-        Total: R$ {formatarMoeda(total)}
+              <div className="linha-cupom troco">
+                <span>Troco</span>
+                <strong>R$ {formatarMoeda(troco > 0 ? troco : 0)}</strong>
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="linha-tracejada"></div>
+
+        <p className="rodape">Obrigado pela preferência!</p>
+
+        <button className="btn imprimir" onClick={imprimirCupom}>
+          Imprimir cupom
+        </button>
       </div>
-
-      <div className="pagamento-cupom">
-        <p>
-          <strong>Pagamento:</strong> {formaPagamento}
-        </p>
-
-        {formaPagamento === "Dinheiro" && (
-          <>
-            <p>
-              <strong>Recebido:</strong>{" "}
-              R$ {formatarMoeda(Number(valorRecebido) || 0)}
-            </p>
-
-            <p>
-              <strong>Troco:</strong>{" "}
-              R$ {formatarMoeda(troco > 0 ? troco : 0)}
-            </p>
-          </>
-        )}
-      </div>
-
-      <p className="rodape">Obrigado pela preferência!</p>
-
-      <button className="btn imprimir" onClick={imprimirCupom}>
-        Imprimir Cupom
-      </button>
     </section>
   )
 }

@@ -1,61 +1,118 @@
-<form className="card venda" onSubmit={enviarFormulario}>
-  <h2>Nova Venda</h2>
+function FormVenda({
+  cliente,
+  setCliente,
+  produto,
+  setProduto,
+  quantidadeFrangos,
+  setQuantidadeFrangos,
+  pesoKg,
+  setPesoKg,
+  valor,
+  setValor,
+  adicionarItem,
+  formaPagamento,
+  setFormaPagamento,
+  valorRecebido,
+  setValorRecebido
+}) {
+  function enviarFormulario(e) {
+    e.preventDefault()
+    adicionarItem()
+  }
 
-  <div className="campo">
-    <label>Cliente</label>
-    <input
-      type="text"
-      placeholder="Nome do cliente"
-      value={cliente}
-      onChange={(e) => setCliente(e.target.value)}
-    />
-  </div>
+  return (
+    <form className="card venda" onSubmit={enviarFormulario}>
+      <div className="card-header">
+        <h2>Nova Venda</h2>
+        <span>PDV</span>
+      </div>
 
-  <div className="campo">
-    <label>Quantidade</label>
-    <input
-      type="number"
-      placeholder="Quantidade (kg)"
-      value={quantidade}
-      onChange={(e) => setQuantidade(e.target.value)}
-    />
-  </div>
+      <div className="campo">
+        <label>Cliente</label>
+        <input
+          type="text"
+          placeholder="Nome do cliente"
+          value={cliente}
+          onChange={(e) => setCliente(e.target.value)}
+        />
+      </div>
 
-  <div className="campo">
-    <label>Valor</label>
-    <input
-      type="number"
-      placeholder="Valor"
-      value={valor}
-      onChange={(e) => setValor(e.target.value)}
-    />
-  </div>
+      <div className="campo">
+        <label>Produto/Corte</label>
+        <select value={produto} onChange={(e) => setProduto(e.target.value)}>
+          <option value="Frango inteiro">Frango inteiro</option>
+          <option value="Asa">Asa</option>
+          <option value="Moela">Moela</option>
+          <option value="Miúdo">Miúdo</option>
+          <option value="Coração">Coração</option>
+          <option value="Peito">Peito</option>
+          <option value="Coxa">Coxa</option>
+          <option value="Sobrecoxa">Sobrecoxa</option>
+          <option value="Fígado">Fígado</option>
+        </select>
+      </div>
 
-  <div className="campo">
-    <label>Pagamento</label>
-    <select
-      value={formaPagamento}
-      onChange={(e) => setFormaPagamento(e.target.value)}
-    >
-      <option value="Dinheiro">Dinheiro</option>
-      <option value="Pix">Pix</option>
-      <option value="Cartão">Cartão</option>
-    </select>
-  </div>
+      {produto === "Frango inteiro" && (
+        <div className="campo">
+          <label>Qtd. frangos</label>
+          <input
+            type="number"
+            placeholder="Ex: 2"
+            value={quantidadeFrangos}
+            onChange={(e) => setQuantidadeFrangos(e.target.value)}
+          />
+        </div>
+      )}
 
-  {formaPagamento === "Dinheiro" && (
-    <div className="campo">
-      <label>Valor recebido</label>
-      <input
-        type="number"
-        placeholder="Valor recebido"
-        value={valorRecebido}
-        onChange={(e) => setValorRecebido(e.target.value)}
-      />
-    </div>
-  )}
+      <div className="campo">
+        <label>Peso total (kg)</label>
+        <input
+          type="number"
+          placeholder="Ex: 4"
+          value={pesoKg}
+          onChange={(e) => setPesoKg(e.target.value)}
+        />
+      </div>
 
-  <button className="btn adicionar" type="submit">
-    Adicionar
-  </button>
-</form>
+      <div className="campo">
+        <label>Valor</label>
+        <input
+          type="number"
+          placeholder="Valor da venda"
+          value={valor}
+          onChange={(e) => setValor(e.target.value)}
+        />
+      </div>
+
+      <div className="campo">
+        <label>Forma de pagamento</label>
+        <select
+          value={formaPagamento}
+          onChange={(e) => setFormaPagamento(e.target.value)}
+        >
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Pix">Pix</option>
+          <option value="Cartão">Cartão</option>
+        </select>
+      </div>
+
+      {formaPagamento === "Dinheiro" && (
+        <div className="campo">
+          <label>Valor recebido</label>
+          <input
+            type="number"
+            placeholder="Valor recebido"
+            value={valorRecebido}
+            onChange={(e) => setValorRecebido(e.target.value)}
+          />
+        </div>
+      )}
+
+      <button className="btn adicionar" type="submit">
+        Adicionar item
+      </button>
+    </form>
+  )
+}
+
+export default FormVenda
