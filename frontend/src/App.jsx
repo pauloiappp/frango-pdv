@@ -71,7 +71,7 @@ function App() {
     <div className="app">
       <header className="topo">
         <div>
-          <h1>Denis Frango</h1>
+          <h1>Dennys Frango</h1>
           <p>Sistema de venda - Abatedor de Frango</p>
         </div>
       </header>

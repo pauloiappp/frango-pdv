@@ -36,7 +36,7 @@ function Cupom({
     <section className="painel-venda">
       <div className="cupom">
         <div className="cupom-topo">
-          <h2>Denis Frango</h2>
+          <h2>Dennys Frango</h2>
           <p>Comprovante de Venda</p>
           <strong className="numero-cupom">Cupom Nº {numeroFormatado}</strong>
         </div>
