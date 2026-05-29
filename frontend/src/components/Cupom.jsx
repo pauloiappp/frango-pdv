@@ -9,8 +9,15 @@ function Cupom({
   valorRecebido,
   troco
 }) {
-  const dataAtual = new Date().toLocaleDateString("pt-BR")
-  const numeroFormatado = String(numeroCupom).padStart(5, "0")
+  const dataHoraAtual = new Date()
+    .toLocaleString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    })
+    .replace(",", "")
 
   function formatarMoeda(valor) {
     return valor.toFixed(2).replace(".", ",")
@@ -38,7 +45,9 @@ function Cupom({
         <div className="cupom-topo">
           <h2>Dennys Frango</h2>
           <p>Comprovante de Venda</p>
-          <strong className="numero-cupom">Cupom Nº {numeroFormatado}</strong>
+          <strong className="numero-cupom">
+            Cupom Nº {String(numeroCupom).padStart(5, "0")}
+          </strong>
         </div>
 
         <div className="linha-tracejada"></div>
@@ -47,8 +56,9 @@ function Cupom({
           <p>
             <strong>Cliente:</strong> {cliente || "Não informado"}
           </p>
+
           <p>
-            <strong>Data:</strong> {dataAtual}
+            <strong>Data/Hora:</strong> {dataHoraAtual}
           </p>
         </div>
 

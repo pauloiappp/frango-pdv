@@ -69,12 +69,20 @@ function App() {
 
   return (
     <div className="app">
-      <header className="topo">
-        <div>
-          <h1>Dennys Frango</h1>
-          <p>Sistema de venda - Abatedor de Frango</p>
-        </div>
-      </header>
+ <header className="topo">
+  <div className="marca">
+    <div className="marca-logo">DF</div>
+
+    <div>
+      <h1>Dennys Frango</h1>
+      <p>Sistema de Venda e Controle Avícola</p>
+    </div>
+  </div>
+
+  <div className="topo-status">
+    <span>PDV Online</span>
+  </div>
+</header>
 
       <main className="layout-pdv">
         <FormVenda
